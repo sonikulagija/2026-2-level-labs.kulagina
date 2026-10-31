@@ -4,7 +4,7 @@ BPE Tokenizer starter
 
 # pylint:disable=too-many-locals, unused-variable
 
-from lab_2_tokenize_by_bpe.main import (
+from main import (
     collect_frequencies,
     decode,
     encode,
@@ -38,27 +38,10 @@ def main() -> None:
     result = None
 
     freq_dict = collect_frequencies(text, None, "</s>")
-    print(f"Demonstration of frequency dictionary: {freq_dict}")
 
     result = train(freq_dict, 100)
-    print(f"Demonstration of trained tokenizer: {result}")
     if result is None:
         return None
-
-    ru_vocab = get_vocabulary(result, "<unk>")
-    if ru_vocab is None:
-        return None
-    decoding_result = decode(secret_text, ru_vocab, "</s>" )
-    print(f"Demonstration of the decoding algorithm: {decoding_result}")
-
-    translated_vocabulary = load_vocabulary("lab_2_tokenize_by_bpe/assets/vocab.json")
-    if translated_vocabulary is None:
-        return None
-    encoded_tokens = encode(ru_text, translated_vocabulary, "\u2581", None, "<unk>")
-    if encoded_tokens is None:
-        return None
-
-    print("Comparison:", encoded_tokens[:20] == ru_expected[:20])
 
     assert result, "Translation not working"
 

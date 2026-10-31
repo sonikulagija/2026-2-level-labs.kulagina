@@ -208,7 +208,7 @@ def train(
         return None
 
     for _ in range(num_merges):
-
+        
         pairs_freq = count_tokens_pairs(word_frequencies)
         if pairs_freq is None:
             return None
@@ -217,7 +217,7 @@ def train(
 
         most_common_pair_list = []
         for key, value in pairs_freq.items():
-            if value == max(pairs_freq.values()):
+            if value == max(list(pairs_freq.values())):
                 most_common_pair_list.append(key)
 
         longest_pair = max(len(word[0] + word[1]) for word in most_common_pair_list)
@@ -240,7 +240,9 @@ def train(
             return None
 
         word_frequencies = merged
-
+        
+        print(f"Step {_}: most frequent pair - {most_common_pair_list[0]}, the longest pair - {longest_pair}, lexical longest - {lexical_longest}")
+        
     return word_frequencies
 
 
